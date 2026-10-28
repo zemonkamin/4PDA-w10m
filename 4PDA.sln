@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4PDA", "4PDA\4PDA.csproj", "{EB927948-6479-49A4-BFA0-988608010BC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegacyProjects.UI.UniversalWindowsPlatform", "LegacyProjects.UI.UniversalWindowsPlatform\LegacyProjects.UI.UniversalWindowsPlatform.csproj", "{7F39A356-5D9A-4E11-B8C8-685D5AD4B64B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegacyProjects.UI.UniversalWindowsPlatform", "LegacyProjects.UI.UniversalWindowsPlatform\LegacyProjects.UI.UniversalWindowsPlatform\LegacyProjects.UI.UniversalWindowsPlatform.csproj", "{7F39A356-5D9A-4E11-B8C8-685D5AD4B64B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
