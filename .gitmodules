@@ -1,3 +1,4 @@
 [submodule "LegacyProjects.UI.UniversalWindowsPlatform"]
-	path = LegacyProjects.UI.UniversalWindowsPlatform
-	url = https://github.com/zemonkamin/LegacyProjects.UI.UniversalWindowsPlatform.git
+    path = LegacyProjects.UI.UniversalWindowsPlatform
+    url = https://github.com/zemonkamin/LegacyProjects.UI.UniversalWindowsPlatform.git
+    branch = only-uwp
