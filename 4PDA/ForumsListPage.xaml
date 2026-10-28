@@ -1,0 +1,97 @@
+﻿<Page
+    x:Class="_4PDA.ForumsListPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource PdaPageBackgroundBrush}">
+        <ListView x:Name="ForumsListView"
+                  Padding="0,8,0,8"
+                  Background="{ThemeResource PdaPageBackgroundBrush}"
+                  IsItemClickEnabled="True"
+                  SelectionMode="None"
+                  ItemClick="ForumsListView_ItemClick">
+            <ListView.ItemsPanel><ItemsPanelTemplate><ItemsStackPanel CacheLength="0.5" /></ItemsPanelTemplate></ListView.ItemsPanel>
+            <ListView.ItemContainerTransitions><TransitionCollection /></ListView.ItemContainerTransitions>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="Margin" Value="0" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <ListViewItemPresenter
+                                    Content="{TemplateBinding Content}"
+                                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                                    ContentTransitions="{TemplateBinding ContentTransitions}"
+                                    HorizontalContentAlignment="Stretch"
+                                    VerticalContentAlignment="Stretch"
+                                    Padding="0"
+                                    Margin="0"
+                                    SelectedBackground="Transparent"
+                                    SelectedForeground="{ThemeResource PdaTextBrush}"
+                                    PointerOverBackground="{ThemeResource PdaPageBackgroundBrush}"
+                                    PressedBackground="{ThemeResource PdaPageBackgroundBrush}" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid HorizontalAlignment="Stretch">
+                        <Border Visibility="{Binding SectionVisibility}" Margin="0,12,0,0" Padding="16,10"
+                                Background="{ThemeResource PdaSelectedBrush}" BorderThickness="3,0,0,0"
+                                BorderBrush="{ThemeResource SystemControlHighlightAccentBrush}">
+                            <TextBlock Text="{Binding Title}" FontSize="14" FontWeight="SemiBold"
+                                       Foreground="{ThemeResource PdaTextBrush}" TextWrapping="Wrap" />
+                        </Border>
+                        <Border Visibility="{Binding ForumVisibility}" MinHeight="52" Padding="0,12,12,12"
+                                BorderThickness="0,0,0,1" BorderBrush="{ThemeResource PdaSelectedBrush}">
+                            <Grid>
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="*" /><ColumnDefinition Width="28" /></Grid.ColumnDefinitions>
+                                <Border Width="{Binding Indent}" />
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Title}" FontSize="16" TextWrapping="Wrap"
+                                               Foreground="{ThemeResource PdaTextBrush}" />
+                                    <TextBlock Text="{Binding LastTopicTitle}" Visibility="{Binding LastTopicVisibility}"
+                                               Margin="0,4,0,0" FontSize="13" MaxLines="1" TextTrimming="CharacterEllipsis"
+                                               Foreground="{ThemeResource PdaSecondaryTextBrush}" />
+                                    <TextBlock Text="{Binding LastPostInfo}" Visibility="{Binding LastPostVisibility}"
+                                               Margin="0,2,0,0" FontSize="12" MaxLines="1" TextTrimming="CharacterEllipsis"
+                                               Foreground="{ThemeResource PdaTertiaryTextBrush}" />
+                                </StackPanel>
+                                <FontIcon Grid.Column="2" Glyph="&#xE76C;" FontSize="12" VerticalAlignment="Center"
+                                          Foreground="{ThemeResource PdaTertiaryTextBrush}" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ProgressRing x:Name="LoadingRing"
+                      Width="48"
+                      Height="48"
+                      IsActive="False"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center" />
+
+        <TextBlock x:Name="EmptyTextBlock"
+                   Visibility="Collapsed"
+                   Text="&#x0424;&#x043E;&#x0440;&#x0443;&#x043C;&#x044B; &#x043D;&#x0435; &#x0437;&#x0430;&#x0433;&#x0440;&#x0443;&#x0436;&#x0435;&#x043D;&#x044B;"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="16"
+                   Margin="16"
+                   TextWrapping="Wrap"
+                   TextAlignment="Center"
+                   Foreground="{ThemeResource PdaSecondaryTextBrush}" />
+    </Grid>
+</Page>

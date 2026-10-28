@@ -1,0 +1,184 @@
+﻿<Page
+    x:Class="_4PDA.DevicePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:_4PDA"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource PdaPageBackgroundBrush}"
+    SizeChanged="DevicePage_SizeChanged">
+
+    <Page.Resources>
+        <DataTemplate x:Key="VirtualSpecificationTemplate">
+            <StackPanel Margin="20,0,20,0">
+                <TextBlock Text="{Binding Title}" Visibility="{Binding HeadingVisibility}" FontSize="20" FontWeight="SemiBold" Margin="0,16,0,8" Foreground="{ThemeResource PdaTextBrush}" TextWrapping="Wrap" />
+                <Grid Padding="0,7" Visibility="{Binding RowVisibility}">
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding Title}" FontSize="13" Foreground="{ThemeResource PdaSecondaryTextBrush}" TextWrapping="Wrap" Margin="0,0,12,0" />
+                    <TextBlock Grid.Column="1" Text="{Binding Value}" FontSize="14" Foreground="{ThemeResource PdaTextBrush}" TextWrapping="Wrap" />
+                </Grid>
+            </StackPanel>
+        </DataTemplate>
+        <Style x:Key="DeviceCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="{ThemeResource PdaSurfaceBrush}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundBaseLowBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Margin" Value="0,0,0,16"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+
+        <DataTemplate x:Key="SummaryRowTemplate">
+            <Grid Padding="0,7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="138"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{Binding Title}" FontSize="13" FontWeight="SemiBold" Foreground="{ThemeResource PdaSecondaryTextBrush}" TextWrapping="Wrap" Margin="0,1,12,0"/>
+                <TextBlock Grid.Column="1" Text="{Binding Value}" FontSize="15" Foreground="{ThemeResource PdaTextBrush}" TextWrapping="Wrap"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SpecificationRowTemplate">
+            <Grid Padding="0,6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="220"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{Binding Title}" FontSize="14" Foreground="{ThemeResource PdaSecondaryTextBrush}" TextWrapping="Wrap" Margin="0,0,16,0"/>
+                <TextBlock Grid.Column="1" Text="{Binding Value}" FontSize="14" Foreground="{ThemeResource PdaTextBrush}" TextWrapping="Wrap"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SpecificationGroupTemplate">
+            <StackPanel Margin="0,0,0,16">
+                <TextBlock Text="{Binding Title}" FontSize="18" FontWeight="SemiBold" Foreground="{ThemeResource PdaTextBrush}" Margin="0,0,0,5" TextWrapping="Wrap"/>
+                <ItemsControl ItemsSource="{Binding Items}" ItemTemplate="{StaticResource SpecificationRowTemplate}"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="RelatedItemTemplate">
+            <Grid Padding="0,8,0,9">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="{Binding Title}" FontSize="15" FontWeight="SemiBold" Foreground="{ThemeResource PdaTextBrush}" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding Section}" FontSize="12" Foreground="{ThemeResource PdaSecondaryTextBrush}" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                </StackPanel>
+                <TextBlock Grid.Column="1" Text="&#xE76C;" FontFamily="Segoe MDL2 Assets" FontSize="13" Foreground="{ThemeResource PdaSecondaryTextBrush}" VerticalAlignment="Center" Margin="14,0,2,0"/>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid>
+        <ScrollViewer x:Name="DeviceContentScrollViewer"
+                      HorizontalScrollMode="Disabled"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalContentAlignment="Center">
+            <Grid x:Name="DeviceRootGrid" Margin="0,28,0,44" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="LeftContentColumn" Width="390"/>
+                    <ColumnDefinition x:Name="RightContentColumn" Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel x:Name="LeftColumnPanel" Grid.Row="0" Grid.Column="0">
+                    <Border Style="{StaticResource DeviceCardStyle}">
+                        <StackPanel x:Name="HeaderGrid">
+                            <Border x:Name="DeviceImageHost"
+                                    Width="220"
+                                    Height="220"
+                                    MaxWidth="330"
+                                    MaxHeight="250"
+                                    Background="{ThemeResource PdaPageBackgroundBrush}"
+                                    BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}"
+                                    BorderThickness="1"
+                                    HorizontalAlignment="Center">
+                                <Grid>
+                                    <TextBlock x:Name="DeviceImagePlaceholder" Text="&#xE7F8;" FontFamily="Segoe MDL2 Assets" FontSize="58" Foreground="{ThemeResource PdaTertiaryTextBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <Image x:Name="DeviceImage" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+
+                            <StackPanel x:Name="DeviceInfoPanel" Margin="0,18,0,0">
+                                <TextBlock x:Name="DeviceBreadcrumbTextBlock" FontSize="13" Foreground="{ThemeResource SystemControlHighlightAccentBrush}" TextWrapping="Wrap" Visibility="Collapsed"/>
+                                <TextBlock x:Name="DeviceTitleTextBlock" Text="Устройство" FontSize="29" FontWeight="SemiBold" Foreground="{ThemeResource PdaTextBrush}" TextWrapping="Wrap" Margin="0,4,0,0"/>
+                                <TextBlock x:Name="DeviceAccessoryTextBlock" FontSize="14" Foreground="{ThemeResource PdaSecondaryTextBrush}" TextWrapping="Wrap" Margin="0,5,0,0" Visibility="Collapsed"/>
+                                <TextBlock x:Name="DeviceRatingTextBlock" FontSize="14" FontWeight="SemiBold" Foreground="{ThemeResource PdaSecondaryTextBrush}" TextWrapping="Wrap" Margin="0,8,0,0" Visibility="Collapsed"/>
+                                <TextBlock x:Name="DeviceDescriptionTextBlock" FontSize="15" Foreground="{ThemeResource PdaTextBrush}" TextWrapping="Wrap" Margin="0,14,0,0" Visibility="Collapsed"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <Border x:Name="SummaryBorder" Style="{StaticResource DeviceCardStyle}" Visibility="Collapsed">
+                        <StackPanel>
+                            <TextBlock Text="Основные данные" FontSize="22" FontWeight="SemiBold" Foreground="{ThemeResource PdaTextBrush}" Margin="0,0,0,4"/>
+                            <ItemsControl x:Name="SummaryItemsControl" ItemTemplate="{StaticResource SummaryRowTemplate}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource DeviceCardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="Действия" FontSize="22" FontWeight="SemiBold" Foreground="{ThemeResource PdaTextBrush}" Margin="0,0,0,10"/>
+                            <Button x:Name="RefreshButton" Content="Обновить" Click="RefreshButton_Click" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border x:Name="RelatedBorder" Style="{StaticResource DeviceCardStyle}" Visibility="Collapsed">
+                        <StackPanel>
+                            <TextBlock Text="Материалы об устройстве" FontSize="22" FontWeight="SemiBold" Foreground="{ThemeResource PdaTextBrush}" Margin="0,0,0,4"/>
+                            <ListView x:Name="RelatedItemsListView" ItemTemplate="{StaticResource RelatedItemTemplate}" IsItemClickEnabled="True" ItemClick="RelatedItemsListView_ItemClick" SelectionMode="None" Padding="0">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                        <Setter Property="Padding" Value="0"/>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                            </ListView>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <StackPanel x:Name="RightColumnPanel" Grid.Row="0" Grid.Column="1" Margin="16,0,0,0">
+                    <Border x:Name="SpecificationsBorder" Style="{StaticResource DeviceCardStyle}" Visibility="Collapsed">
+                        <StackPanel>
+                            <TextBlock Text="Характеристики" FontSize="22" FontWeight="SemiBold" Foreground="{ThemeResource PdaTextBrush}" Margin="0,0,0,12"/>
+                            <ItemsControl x:Name="SpecificationGroupsItemsControl" ItemTemplate="{StaticResource SpecificationGroupTemplate}"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <TextBlock x:Name="StatusTextBlock"
+                           Grid.Row="1"
+                           Grid.ColumnSpan="2"
+                           FontSize="14"
+                           Foreground="{ThemeResource PdaSecondaryTextBrush}"
+                           TextWrapping="Wrap"
+                           Margin="4,0,4,8"
+                           Visibility="Collapsed"/>
+            </Grid>
+        </ScrollViewer>
+        <ListView x:Name="MobileDeviceList" Visibility="Collapsed" SelectionMode="None" IsItemClickEnabled="False"
+                  ItemTemplate="{StaticResource VirtualSpecificationTemplate}" HorizontalContentAlignment="Stretch">
+            <ListView.ItemsPanel><ItemsPanelTemplate><ItemsStackPanel CacheLength="0.5" /></ItemsPanelTemplate></ListView.ItemsPanel>
+            <ListView.ItemContainerStyle><Style TargetType="ListViewItem"><Setter Property="HorizontalContentAlignment" Value="Stretch" /><Setter Property="Padding" Value="0" /></Style></ListView.ItemContainerStyle>
+            <ListView.ItemContainerTransitions><TransitionCollection /></ListView.ItemContainerTransitions>
+        </ListView>
+
+        <ProgressRing x:Name="DeviceProgressRing"
+                      Width="52"
+                      Height="52"
+                      IsActive="False"
+                      Visibility="Collapsed"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"/>
+    </Grid>
+</Page>

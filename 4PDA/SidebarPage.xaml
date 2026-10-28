@@ -1,0 +1,210 @@
+﻿<Page
+    x:Class="_4PDA.SidebarPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="using:LegacyProjects.UI.UniversalWindowsPlatform.Controls"
+    xmlns:models="using:LegacyProjects.UI.UniversalWindowsPlatform.Models"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    SizeChanged="Page_SizeChanged"
+    Loaded="Page_Loaded"
+    Unloaded="Page_Unloaded"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <SolidColorBrush x:Key="SidebarBackgroundBrush" Color="#111310" />
+        <SolidColorBrush x:Key="SidebarSelectedBrush" Color="#333634" />
+        <SolidColorBrush x:Key="SidebarPressedBrush" Color="#333634" />
+        <SolidColorBrush x:Key="SidebarDividerBrush" Color="#333634" />
+        <SolidColorBrush x:Key="SidebarForegroundBrush" Color="White" />
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource PdaPageBackgroundBrush}">
+        <ui:UniversalNavigationBar
+            x:Name="TopNavigationBar"
+            BarHeight="56"
+            Background="{StaticResource SidebarBackgroundBrush}"
+            BackgroundOpacity="0"
+            PressAnimationEnabled="True"
+            PressAnimationScale="0.94"
+            PressAnimationDuration="90"
+            ItemForeground="White"
+            DisabledForeground="White"
+            DisabledItemOpacity="1"
+            BottomSeparatorEnabled="False"
+            ItemPadding="0"
+            IconSize="16"
+            ShowIcons="True"
+            ShowText="True"
+            ActionTargetType="_4PDA.AppNavigationActions"
+            Canvas.ZIndex="20">
+            <ui:UniversalNavigationBar.LeftItems>
+                <models:UniversalNavigationBarItem Key="menu" Text="" Glyph="&#xE700;" Width="50" MinWidth="50" ClickAction="ToggleSidebar" />
+                <models:UniversalNavigationBarItem x:Name="TitleNavigationItem" Key="title" Text="" Glyph="" IsEnabled="False" Width="0" MinWidth="0" />
+            </ui:UniversalNavigationBar.LeftItems>
+            <ui:UniversalNavigationBar.RightItems>
+                <models:UniversalNavigationBarItem x:Name="ComposeNavigationItem" Key="compose" Text="" Glyph="&#xEDC6;" Width="50" MinWidth="50" ClickAction="OpenMessage" />
+                <models:UniversalNavigationBarItem x:Name="SearchNavigationItem" Key="search" Text="" Glyph="&#xE721;" Width="50" MinWidth="50" ClickAction="OpenForumSearch" />
+            </ui:UniversalNavigationBar.RightItems>
+        </ui:UniversalNavigationBar>
+
+        <Grid x:Name="PageTitleHeaderOverlay"
+              Height="56"
+              Margin="50,0,50,0"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Top"
+              Background="Transparent"
+              IsHitTestVisible="False"
+              Canvas.ZIndex="22">
+            <TextBlock x:Name="PageTitleTextBlock"
+                       Margin="8,0,8,0"
+                       VerticalAlignment="Center"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       TextWrapping="NoWrap"
+                       TextTrimming="CharacterEllipsis" />
+        </Grid>
+
+        <Grid x:Name="ChatHeaderOverlay"
+              Height="56"
+              Margin="50,0,50,0"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Top"
+              Background="{StaticResource SidebarBackgroundBrush}"
+              Visibility="Collapsed"
+              IsHitTestVisible="False"
+              Canvas.ZIndex="24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="42" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0"
+                  Width="34"
+                  Height="34"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center">
+                <Border x:Name="ChatAvatarFallback"
+                        Background="{StaticResource SidebarSelectedBrush}">
+                    <TextBlock Text="&#xE77B;"
+                               FontFamily="Segoe MDL2 Assets"
+                               FontSize="20"
+                               Foreground="White"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Border>
+                <Image x:Name="ChatAvatarImage"
+                       Stretch="UniformToFill"
+                       ImageOpened="ChatAvatarImage_ImageOpened"
+                       ImageFailed="ChatAvatarImage_ImageFailed" />
+            </Grid>
+
+            <StackPanel Grid.Column="1"
+                        Margin="0,6,8,5"
+                        VerticalAlignment="Center">
+                <TextBlock x:Name="ChatHeaderTitleTextBlock"
+                           FontSize="14"
+                           FontWeight="SemiBold"
+                           Foreground="White"
+                           TextWrapping="NoWrap"
+                           TextTrimming="CharacterEllipsis" />
+                <TextBlock x:Name="ChatHeaderContactTextBlock"
+                           Margin="0,1,0,0"
+                           FontSize="12"
+                           Foreground="#FFC8C8C8"
+                           TextWrapping="NoWrap"
+                           TextTrimming="CharacterEllipsis" />
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="ForumSearchHeaderOverlay"
+              Height="56"
+              Margin="0"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Top"
+              Background="{StaticResource SidebarBackgroundBrush}"
+              Visibility="Collapsed"
+              Canvas.ZIndex="26">
+            <TextBox x:Name="ForumSearchTextBox"
+                     Margin="8"
+                     Padding="10,0,8,0"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Stretch"
+                     Background="#FF252825"
+                     Foreground="White"
+                     BorderThickness="0"
+                     FontSize="14"
+                     VerticalContentAlignment="Center"
+                     PlaceholderText="Поиск по форуму"
+                     InputScope="Search"
+                     Loaded="ForumSearchTextBox_Loaded"
+                     KeyDown="ForumSearchTextBox_KeyDown" />
+        </Grid>
+
+        <SplitView x:Name="SidebarHost" Margin="0,56,0,0" DisplayMode="Overlay" PanePlacement="Left"
+                   OpenPaneLength="300" CompactPaneLength="0" IsPaneOpen="False"
+                   PaneBackground="{StaticResource SidebarBackgroundBrush}">
+            <SplitView.Resources><SolidColorBrush x:Key="SplitViewLightDismissOverlayBackground" Color="Transparent" /></SplitView.Resources>
+            <SplitView.Content>
+                <Grid>
+                    <Frame x:Name="ContentFrame" Background="{ThemeResource PdaPageBackgroundBrush}" />
+                    <Grid x:Name="SidebarDismissOverlay" Background="#80000000" Visibility="Collapsed"
+                          Tapped="SidebarDismissOverlay_Tapped" />
+                </Grid>
+            </SplitView.Content>
+            <SplitView.Pane>
+        <ui:UniversalSidebar
+            x:Name="Sidebar"
+            TopOffset="0"
+            IsPaneOpen="True"
+            OpenPaneWidth="300"
+            CompactPaneWidth="50"
+            HorizontalBreakpoint="768"
+            ShowIconsWhenClosedInHorizontalMode="True"
+            AnimationEnabled="False"
+            AnimationDuration="240"
+            AnimationEasingFunction="Cubic"
+            AnimationEasingMode="EaseOut"
+            PressAnimationEnabled="True"
+            PressAnimationScale="0.94"
+            PressAnimationDuration="90"
+            TopItemsPinned="True"
+            BottomItemsPinned="True"
+            Background="{StaticResource SidebarBackgroundBrush}"
+            BackgroundOpacity="0"
+            SelectedItemBackground="{StaticResource SidebarSelectedBrush}"
+            UnselectedItemBackground="Transparent"
+            DisabledItemBackground="Transparent"
+            SelectedItemForeground="{StaticResource SidebarForegroundBrush}"
+            UnselectedItemForeground="{StaticResource SidebarForegroundBrush}"
+            DisabledItemForeground="#FF808080"
+            SeparatorBrush="{StaticResource SidebarDividerBrush}"
+            SideSeparatorEnabled="True"
+            SideSeparatorThickness="1"
+            SideSeparatorBrush="{StaticResource SidebarDividerBrush}"
+            SelectedKey="home"
+            ItemHeight="56"
+            ItemPadding="16,0,16,0"
+            IconSize="18"
+            LabelFontSize="16"
+            IconTextSpacing="0"
+            ActionTargetType="_4PDA.AppNavigationActions"
+            Canvas.ZIndex="15">
+            <ui:UniversalSidebar.TopItems>
+                <models:UniversalSidebarItem Key="home" Text="&#x0414;&#x043E;&#x043C;&#x0430;&#x0448;&#x043D;&#x044F;&#x044F;" Glyph="&#xE80F;" ClickAction="OpenHome" />
+            </ui:UniversalSidebar.TopItems>
+            <ui:UniversalSidebar.Items>
+                <models:UniversalSidebarItem Key="forum" Text="&#x0424;&#x043E;&#x0440;&#x0443;&#x043C;" Glyph="&#xE8F2;" ClickAction="OpenForum" />
+                <models:UniversalSidebarItem x:Name="MessagesSidebarItem" Key="qms" Text="Сообщения" Glyph="&#xE8BD;" IsEnabled="False" ClickAction="OpenQms" />
+                <models:UniversalSidebarItem x:Name="FavouritesSidebarItem" Key="favourites" Text="&#x0418;&#x0437;&#x0431;&#x0440;&#x0430;&#x043D;&#x043D;&#x043E;&#x0435;" Glyph="&#xE734;" IsEnabled="False" ClickAction="OpenFavourites" />
+            </ui:UniversalSidebar.Items>
+            <ui:UniversalSidebar.BottomItems>
+                <models:UniversalSidebarItem Key="settings" Text="&#x041D;&#x0430;&#x0441;&#x0442;&#x0440;&#x043E;&#x0439;&#x043A;&#x0438;" Glyph="&#xE713;" ClickAction="OpenSettings" />
+                <models:UniversalSidebarItem x:Name="AccountSidebarItem" Key="profile" Text="Аккаунт" Glyph="&#xE77B;" IsImageIconRounded="True" ClickAction="OpenProfile" />
+            </ui:UniversalSidebar.BottomItems>
+        </ui:UniversalSidebar>
+            </SplitView.Pane>
+        </SplitView>
+    </Grid>
+</Page>

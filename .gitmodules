@@ -1,0 +1,3 @@
+[submodule "LegacyProjects.UI.UniversalWindowsPlatform"]
+	path = LegacyProjects.UI.UniversalWindowsPlatform
+	url = https://github.com/zemonkamin/LegacyProjects.UI.UniversalWindowsPlatform.git

@@ -1,0 +1,458 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{EB927948-6479-49A4-BFA0-988608010BC8}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>_4PDA</RootNamespace>
+    <AssemblyName>4PDA</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PackageCertificateKeyFile>4PDA_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsMobile, Version=10.0.14393.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AppNavigationActions.cs" />
+    <Compile Include="ChatPage.xaml.cs">
+      <DependentUpon>ChatPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FavouritesPage.xaml.cs">
+      <DependentUpon>FavouritesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ForumPage.xaml.cs">
+      <DependentUpon>ForumPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ForumsListPage.xaml.cs">
+      <DependentUpon>ForumsListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MessagePage.xaml.cs">
+      <DependentUpon>MessagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ForumItem.cs" />
+    <Compile Include="Models\ForumListItem.cs" />
+    <Compile Include="Models\ForumTopicItem.cs" />
+    <Compile Include="Models\ForumTopicsData.cs" />
+    <Compile Include="Models\MessagePageParameters.cs" />
+    <Compile Include="Models\NewsArticle.cs" />
+    <Compile Include="Models\NewsItem.cs" />
+    <Compile Include="Models\LiveTileNewsItem.cs" />
+    <Compile Include="Models\TopicPageData.cs" />
+    <Compile Include="Models\TopicNavigationState.cs" />
+    <Compile Include="Models\TopicPostItem.cs" />
+    <Compile Include="DevicePage.xaml.cs">
+      <DependentUpon>DevicePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewsPage.xaml.cs">
+      <DependentUpon>NewsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QMSPage.xaml.cs">
+      <DependentUpon>QMSPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\AppSettingsService.cs" />
+    <Compile Include="Services\FourPdaForumService.cs" />
+    <Compile Include="Services\FourPdaNewsService.cs" />
+    <Compile Include="Services\FourPdaResponseHelper.cs" />
+    <Compile Include="Services\FourPdaImageService.cs" />
+    <Compile Include="Services\ImageLoadPolicy.cs" />
+    <Compile Include="Services\DeferredImage.cs" />
+    <Compile Include="Services\OfficialApiClient.cs" />
+    <Compile Include="Services\OfficialApiRequestRunner.cs" />
+    <Compile Include="Services\OfficialApiContent.cs" />
+    <Compile Include="Services\LoginFlow.cs" />
+    <Compile Include="Services\NewsCardPolicy.cs" />
+    <Compile Include="Services\AppPhotoViewer.cs" />
+    <Compile Include="Services\OfficialApiAttachments.cs" />
+    <Compile Include="Services\OfficialApiFavorites.cs" />
+    <Compile Include="Services\ForumPostImagePolicy.cs" />
+    <Compile Include="Services\ForumPostNavigation.cs" />
+    <Compile Include="Services\TopicPagingState.cs" />
+    <Compile Include="Services\ScrollJumpState.cs" />
+    <Compile Include="Services\OfficialApiService.cs" />
+    <Compile Include="Services\LiveTileService.cs" />
+    <Compile Include="Services\QmsService.cs" />
+    <Compile Include="ShowNewsPage.xaml.cs">
+      <DependentUpon>ShowNewsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SidebarPage.xaml.cs">
+      <DependentUpon>SidebarPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TopicPage.xaml.cs">
+      <DependentUpon>TopicPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserPage.xaml.cs">
+      <DependentUpon>UserPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <None Include="4PDA_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\smiles\acute.gif" />
+    <Content Include="Assets\smiles\aggressive.gif" />
+    <Content Include="Assets\smiles\air_kiss.gif" />
+    <Content Include="Assets\smiles\angry.gif" />
+    <Content Include="Assets\smiles\antifeminism.gif" />
+    <Content Include="Assets\smiles\banned.gif" />
+    <Content Include="Assets\smiles\beee.gif" />
+    <Content Include="Assets\smiles\beta.gif" />
+    <Content Include="Assets\smiles\biggrin.gif" />
+    <Content Include="Assets\smiles\blink.gif" />
+    <Content Include="Assets\smiles\blush.gif" />
+    <Content Include="Assets\smiles\boy_girl.gif" />
+    <Content Include="Assets\smiles\bubble.gif" />
+    <Content Include="Assets\smiles\butcher.gif" />
+    <Content Include="Assets\smiles\censored.gif" />
+    <Content Include="Assets\smiles\clap.gif" />
+    <Content Include="Assets\smiles\clapping.gif" />
+    <Content Include="Assets\smiles\close_tema.gif" />
+    <Content Include="Assets\smiles\coldly.gif" />
+    <Content Include="Assets\smiles\comando.gif" />
+    <Content Include="Assets\smiles\confusion.gif" />
+    <Content Include="Assets\smiles\confusion2.gif" />
+    <Content Include="Assets\smiles\congratulate.gif" />
+    <Content Include="Assets\smiles\cool.gif" />
+    <Content Include="Assets\smiles\cry.gif" />
+    <Content Include="Assets\smiles\cry2.gif" />
+    <Content Include="Assets\smiles\daisy.gif" />
+    <Content Include="Assets\smiles\dance.gif" />
+    <Content Include="Assets\smiles\dancer.gif" />
+    <Content Include="Assets\smiles\derisive.gif" />
+    <Content Include="Assets\smiles\devil.gif" />
+    <Content Include="Assets\smiles\dinamo.gif" />
+    <Content Include="Assets\smiles\dirol.gif" />
+    <Content Include="Assets\smiles\diver.gif" />
+    <Content Include="Assets\smiles\download.gif" />
+    <Content Include="Assets\smiles\drag.gif" />
+    <Content Include="Assets\smiles\drinks.gif" />
+    <Content Include="Assets\smiles\dry.gif" />
+    <Content Include="Assets\smiles\feminist.gif" />
+    <Content Include="Assets\smiles\first_move.gif" />
+    <Content Include="Assets\smiles\flood.gif" />
+    <Content Include="Assets\smiles\fool.gif" />
+    <Content Include="Assets\smiles\foto.gif" />
+    <Content Include="Assets\smiles\friends.gif" />
+    <Content Include="Assets\smiles\girl_angry.gif" />
+    <Content Include="Assets\smiles\girl_blum.gif" />
+    <Content Include="Assets\smiles\girl_chmok.gif" />
+    <Content Include="Assets\smiles\girl_cray.gif" />
+    <Content Include="Assets\smiles\girl_cray2.gif" />
+    <Content Include="Assets\smiles\girl_crazy.gif" />
+    <Content Include="Assets\smiles\girl_curtsey.gif" />
+    <Content Include="Assets\smiles\girl_dance.gif" />
+    <Content Include="Assets\smiles\girl_devil.gif" />
+    <Content Include="Assets\smiles\girl_flirt.gif" />
+    <Content Include="Assets\smiles\girl_haha.gif" />
+    <Content Include="Assets\smiles\girl_hide.gif" />
+    <Content Include="Assets\smiles\girl_hospital.gif" />
+    <Content Include="Assets\smiles\girl_hysterics.gif" />
+    <Content Include="Assets\smiles\girl_in_love.gif" />
+    <Content Include="Assets\smiles\girl_kiss.gif" />
+    <Content Include="Assets\smiles\girl_mad.gif" />
+    <Content Include="Assets\smiles\girl_parting.gif" />
+    <Content Include="Assets\smiles\girl_pinkglassesf.gif" />
+    <Content Include="Assets\smiles\girl_prepare_fish.gif" />
+    <Content Include="Assets\smiles\girl_sad.gif" />
+    <Content Include="Assets\smiles\girl_smile.gif" />
+    <Content Include="Assets\smiles\girl_spruce_up.gif" />
+    <Content Include="Assets\smiles\girl_tear.gif" />
+    <Content Include="Assets\smiles\girl_teddy.gif" />
+    <Content Include="Assets\smiles\girl_tender.gif" />
+    <Content Include="Assets\smiles\girl_to_babruysk.gif" />
+    <Content Include="Assets\smiles\girl_to_take_umbrage.gif" />
+    <Content Include="Assets\smiles\girl_tongue.gif" />
+    <Content Include="Assets\smiles\girl_triniti.gif" />
+    <Content Include="Assets\smiles\girl_wacko.gif" />
+    <Content Include="Assets\smiles\girl_werewolf.gif" />
+    <Content Include="Assets\smiles\girl_wink.gif" />
+    <Content Include="Assets\smiles\girl_wink2.gif" />
+    <Content Include="Assets\smiles\girl_witch.gif" />
+    <Content Include="Assets\smiles\give_rose.gif" />
+    <Content Include="Assets\smiles\good.gif" />
+    <Content Include="Assets\smiles\good_luck.gif" />
+    <Content Include="Assets\smiles\grabli.gif" />
+    <Content Include="Assets\smiles\guess.gif" />
+    <Content Include="Assets\smiles\hang.gif" />
+    <Content Include="Assets\smiles\happy.gif" />
+    <Content Include="Assets\smiles\heart.gif" />
+    <Content Include="Assets\smiles\help.gif" />
+    <Content Include="Assets\smiles\helpsmilie.gif" />
+    <Content Include="Assets\smiles\hemp.gif" />
+    <Content Include="Assets\smiles\heppy_dancing.gif" />
+    <Content Include="Assets\smiles\huh.gif" />
+    <Content Include="Assets\smiles\hysterics.gif" />
+    <Content Include="Assets\smiles\i-m_so_happy.gif" />
+    <Content Include="Assets\smiles\indeec.gif" />
+    <Content Include="Assets\smiles\kindness.gif" />
+    <Content Include="Assets\smiles\king.gif" />
+    <Content Include="Assets\smiles\kiss.gif" />
+    <Content Include="Assets\smiles\kiss2.gif" />
+    <Content Include="Assets\smiles\kitten.gif" />
+    <Content Include="Assets\smiles\laugh.gif" />
+    <Content Include="Assets\smiles\laugh2.gif" />
+    <Content Include="Assets\smiles\laugh_wild.gif" />
+    <Content Include="Assets\smiles\love_4PDA.gif" />
+    <Content Include="Assets\smiles\mad.gif" />
+    <Content Include="Assets\smiles\mellow.gif" />
+    <Content Include="Assets\smiles\moil.gif" />
+    <Content Include="Assets\smiles\nea.gif" />
+    <Content Include="Assets\smiles\no.gif" />
+    <Content Include="Assets\smiles\nono.gif" />
+    <Content Include="Assets\smiles\offtopic.gif" />
+    <Content Include="Assets\smiles\ohmy.gif" />
+    <Content Include="Assets\smiles\ok.gif" />
+    <Content Include="Assets\smiles\papuas.gif" />
+    <Content Include="Assets\smiles\party.gif" />
+    <Content Include="Assets\smiles\ph34r.gif" />
+    <Content Include="Assets\smiles\pioneer_smoke.gif" />
+    <Content Include="Assets\smiles\pipiska.gif" />
+    <Content Include="Assets\smiles\popcorm.gif" />
+    <Content Include="Assets\smiles\protest.gif" />
+    <Content Include="Assets\smiles\rabbi.gif" />
+    <Content Include="Assets\smiles\resent.gif" />
+    <Content Include="Assets\smiles\rofl.gif" />
+    <Content Include="Assets\smiles\roll.gif" />
+    <Content Include="Assets\smiles\rolleyes.gif" />
+    <Content Include="Assets\smiles\rolleyes2.gif" />
+    <Content Include="Assets\smiles\rtfm.gif" />
+    <Content Include="Assets\smiles\russian.gif" />
+    <Content Include="Assets\smiles\russian_garmoshka.gif" />
+    <Content Include="Assets\smiles\russian_ru.gif" />
+    <Content Include="Assets\smiles\sad.gif" />
+    <Content Include="Assets\smiles\scare.gif" />
+    <Content Include="Assets\smiles\scratch_one-s_head.gif" />
+    <Content Include="Assets\smiles\search.gif" />
+    <Content Include="Assets\smiles\secret.gif" />
+    <Content Include="Assets\smiles\shok.gif" />
+    <Content Include="Assets\smiles\skull.gif" />
+    <Content Include="Assets\smiles\sleep.gif" />
+    <Content Include="Assets\smiles\smile.gif" />
+    <Content Include="Assets\smiles\smile_good.gif" />
+    <Content Include="Assets\smiles\smile_good2.gif" />
+    <Content Include="Assets\smiles\smoke.gif" />
+    <Content Include="Assets\smiles\sorry.gif" />
+    <Content Include="Assets\smiles\spiteful.gif" />
+    <Content Include="Assets\smiles\stop_flood.gif" />
+    <Content Include="Assets\smiles\stop_holywar.gif" />
+    <Content Include="Assets\smiles\suicide.gif" />
+    <Content Include="Assets\smiles\superman.gif" />
+    <Content Include="Assets\smiles\superstition.gif" />
+    <Content Include="Assets\smiles\sveta.gif" />
+    <Content Include="Assets\smiles\tablet_protiv.gif" />
+    <Content Include="Assets\smiles\tablet_za.gif" />
+    <Content Include="Assets\smiles\thank_you.gif" />
+    <Content Include="Assets\smiles\this.gif" />
+    <Content Include="Assets\smiles\to_clue.gif" />
+    <Content Include="Assets\smiles\tomato.gif" />
+    <Content Include="Assets\smiles\tommy.gif" />
+    <Content Include="Assets\smiles\tongue.gif" />
+    <Content Include="Assets\smiles\tongue3.gif" />
+    <Content Include="Assets\smiles\umnik.gif" />
+    <Content Include="Assets\smiles\unsure.gif" />
+    <Content Include="Assets\smiles\victory.gif" />
+    <Content Include="Assets\smiles\vinsent.gif" />
+    <Content Include="Assets\smiles\wacko.gif" />
+    <Content Include="Assets\smiles\wallbash.gif" />
+    <Content Include="Assets\smiles\whistle.gif" />
+    <Content Include="Assets\smiles\wink.gif" />
+    <Content Include="Assets\smiles\wink_kind.gif" />
+    <Content Include="Assets\smiles\wub.gif" />
+    <Content Include="Assets\smiles\yahoo.gif" />
+    <Content Include="Assets\smiles\yes.gif" />
+    <Content Include="Assets\4pda_logo.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ChatPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FavouritesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ForumPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ForumsListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LoginPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MessagePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="NewsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ShowNewsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DevicePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="QMSPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SidebarPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TopicPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LegacyProjects.UI.UniversalWindowsPlatform\LegacyProjects.UI.UniversalWindowsPlatform.csproj">
+      <Project>{7f39a356-5d9a-4e11-b8c8-685d5ad4b64b}</Project>
+      <Name>LegacyProjects.UI.UniversalWindowsPlatform</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

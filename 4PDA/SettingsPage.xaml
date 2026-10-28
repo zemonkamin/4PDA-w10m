@@ -1,0 +1,202 @@
+<Page
+    x:Class="_4PDA.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource PdaPageBackgroundBrush}">
+
+    <Page.Resources>
+        <Style x:Key="SettingsCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="{ThemeResource PdaSurfaceBrush}" />
+            <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundBaseLowBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="22" />
+            <Setter Property="Margin" Value="0,0,0,16" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+        </Style>
+
+        <Style x:Key="SettingsTitleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Foreground" Value="{ThemeResource PdaTextBrush}" />
+        </Style>
+
+        <Style x:Key="SettingsDescriptionStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Foreground" Value="{ThemeResource PdaSecondaryTextBrush}" />
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WindowSizeStates">
+                <VisualState x:Name="CompactState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SettingsRootPanel.Margin" Value="12,16,12,32" />
+                        <Setter Target="DownloadCard.Padding" Value="16" />
+                        <Setter Target="LiveTileCard.Padding" Value="16" />
+                        <Setter Target="TopicReadingCard.Padding" Value="16" />
+                        <Setter Target="SelectDownloadFolderButton.HorizontalAlignment" Value="Stretch" />
+                        <Setter Target="LiveTileToggleSwitch.(Grid.Row)" Value="1" />
+                        <Setter Target="LiveTileToggleSwitch.(Grid.Column)" Value="0" />
+                        <Setter Target="LiveTileToggleSwitch.Margin" Value="0,16,0,0" />
+                        <Setter Target="LiveTileToggleSwitch.HorizontalAlignment" Value="Left" />
+                        <Setter Target="LiveTileToggleSwitch.VerticalAlignment" Value="Top" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="520" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SettingsRootPanel.Margin" Value="24,28,24,48" />
+                        <Setter Target="DownloadCard.Padding" Value="22" />
+                        <Setter Target="LiveTileCard.Padding" Value="22" />
+                        <Setter Target="TopicReadingCard.Padding" Value="22" />
+                        <Setter Target="SelectDownloadFolderButton.HorizontalAlignment" Value="Left" />
+                        <Setter Target="LiveTileToggleSwitch.(Grid.Row)" Value="0" />
+                        <Setter Target="LiveTileToggleSwitch.(Grid.Column)" Value="1" />
+                        <Setter Target="LiveTileToggleSwitch.Margin" Value="20,0,0,0" />
+                        <Setter Target="LiveTileToggleSwitch.HorizontalAlignment" Value="Right" />
+                        <Setter Target="LiveTileToggleSwitch.VerticalAlignment" Value="Center" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <ScrollViewer HorizontalScrollMode="Disabled"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalContentAlignment="Stretch">
+            <Grid>
+                <StackPanel x:Name="SettingsRootPanel"
+                            MaxWidth="680"
+                            HorizontalAlignment="Center"
+                            Margin="24,28,24,48">
+
+                    <StackPanel Margin="4,0,4,18">
+                        <TextBlock Text="Настройки"
+                                   FontSize="28"
+                                   FontWeight="SemiBold"
+                                   TextWrapping="Wrap"
+                                   Foreground="{ThemeResource PdaTextBrush}" />
+                        <TextBlock Text="Загрузка файлов и параметры приложения"
+                                   Margin="0,4,0,0"
+                                   Style="{StaticResource SettingsDescriptionStyle}" />
+                    </StackPanel>
+
+                    <Border x:Name="DownloadCard"
+                            Style="{StaticResource SettingsCardStyle}">
+                            <StackPanel>
+                                <TextBlock Text="Скачивание файлов"
+                                           Style="{StaticResource SettingsTitleStyle}" />
+
+                                <TextBlock Text="По умолчанию файлы из тем сохраняются в системную папку «Загрузки». При необходимости можно выбрать другую папку."
+                                           Margin="0,8,0,16"
+                                           Style="{StaticResource SettingsDescriptionStyle}" />
+
+                                <TextBlock Text="Текущая папка"
+                                           FontSize="13"
+                                           FontWeight="SemiBold"
+                                           Foreground="{ThemeResource PdaSecondaryTextBrush}" />
+
+                                <TextBlock x:Name="DownloadFolderTextBlock"
+                                           Margin="0,5,0,16"
+                                           Text="Загрузки (системная папка)"
+                                           FontSize="15"
+                                           TextWrapping="Wrap"
+                                           Foreground="{ThemeResource PdaTextBrush}" />
+
+                                <Button x:Name="SelectDownloadFolderButton"
+                                        MinHeight="40"
+                                        Padding="16,8"
+                                        Content="Выбрать другую папку"
+                                        HorizontalAlignment="Left"
+                                        HorizontalContentAlignment="Center"
+                                        Click="SelectDownloadFolderButton_Click" />
+                            </StackPanel>
+                    </Border>
+
+                    <Border x:Name="TopicReadingCard" Style="{StaticResource SettingsCardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="Чтение тем" Style="{StaticResource SettingsTitleStyle}" />
+                            <TextBlock Text="Выберите, как переходить между сообщениями в теме."
+                                       Margin="0,8,0,12" Style="{StaticResource SettingsDescriptionStyle}" />
+                            <ComboBox x:Name="TopicReadingModeComboBox" HorizontalAlignment="Stretch"
+                                      AutomationProperties.Name="Способ чтения тем" SelectionChanged="TopicReadingModeComboBox_SelectionChanged">
+                                <ComboBoxItem Content="По страницам" />
+                                <ComboBoxItem Content="Бесконечная прокрутка" />
+                            </ComboBox>
+                            <ToggleSwitch x:Name="TopicScrollJumpToggleSwitch" Header="Кнопка перехода вверх/вниз"
+                                          Margin="0,20,0,0" OnContent="Вкл." OffContent="Выкл."
+                                          Toggled="TopicScrollJumpToggleSwitch_Toggled" />
+                            <TextBlock Text="При прокрутке темы показывать кнопку в направлении движения. Она скрывается через 3 секунды."
+                                       Margin="0,8,0,0" Style="{StaticResource SettingsDescriptionStyle}" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border x:Name="LiveTileCard"
+                            Style="{StaticResource SettingsCardStyle}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Row="0"
+                                        Grid.Column="0">
+                                <TextBlock Text="Живая плитка"
+                                           Style="{StaticResource SettingsTitleStyle}" />
+
+                                <TextBlock Text="Показывать сохранённые новости на плитке приложения: затемнённое изображение и название новости."
+                                           Margin="0,8,0,0"
+                                           Style="{StaticResource SettingsDescriptionStyle}" />
+                            </StackPanel>
+
+                            <ToggleSwitch x:Name="LiveTileToggleSwitch"
+                                          Grid.Row="0"
+                                          Grid.Column="1"
+                                          Margin="20,0,0,0"
+                                          HorizontalAlignment="Right"
+                                          VerticalAlignment="Center"
+                                          OnContent="Вкл."
+                                          OffContent="Выкл."
+                                          Toggled="LiveTileToggleSwitch_Toggled" />
+                        </Grid>
+                    </Border>
+
+                    <TextBlock x:Name="SettingsStatusTextBlock"
+                               Visibility="Collapsed"
+                               Margin="4,0,4,0"
+                               FontSize="14"
+                               TextWrapping="Wrap"
+                               Foreground="{ThemeResource PdaSecondaryTextBrush}" />
+
+                    <StackPanel Margin="4,24,4,0"
+                                HorizontalAlignment="Center">
+                        <TextBlock x:Name="ApplicationVersionTextBlock"
+                                   Text="Версия приложения"
+                                   TextAlignment="Center"
+                                   Style="{StaticResource SettingsDescriptionStyle}" />
+                        <TextBlock Text="Разработано LegacyProjects"
+                                   Margin="0,4,0,0"
+                                   TextAlignment="Center"
+                                   Style="{StaticResource SettingsDescriptionStyle}" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

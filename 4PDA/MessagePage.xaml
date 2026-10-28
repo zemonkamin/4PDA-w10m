@@ -1,0 +1,194 @@
+﻿<Page
+    x:Class="_4PDA.MessagePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource PdaPageBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                Background="{ThemeResource PdaSurfaceBrush}"
+                BorderBrush="{ThemeResource PdaSelectedBrush}"
+                BorderThickness="0,0,0,1"
+                Padding="16,12">
+            <StackPanel>
+                <TextBlock Text="ОТВЕТ В ТЕМУ"
+                           FontSize="12"
+                           FontWeight="SemiBold"
+                           CharacterSpacing="70"
+                           Foreground="{ThemeResource SystemControlHighlightAccentBrush}" />
+                <TextBlock x:Name="TopicTitleTextBlock"
+                           Margin="0,3,0,0"
+                           FontSize="20"
+                           FontWeight="SemiBold"
+                           TextWrapping="Wrap"
+                           Foreground="{ThemeResource PdaTextBrush}" />
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Row="1" Margin="12,10,12,8">
+            <TextBox x:Name="MessageTextBox"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     VerticalContentAlignment="Top"
+                     FontFamily="Consolas"
+                     FontSize="16"
+                     MinHeight="180"
+                     Padding="12"
+                     PlaceholderText="Введите сообщение"
+                     TextChanged="MessageTextBox_TextChanged" />
+
+            <ScrollViewer x:Name="PreviewScrollViewer"
+                          Visibility="Collapsed"
+                          Background="{ThemeResource PdaSurfaceBrush}"
+                          BorderBrush="{ThemeResource PdaSelectedBrush}"
+                          BorderThickness="1"
+                          Padding="14"
+                          VerticalScrollBarVisibility="Auto">
+                <TextBlock x:Name="PreviewTextBlock"
+                           FontSize="16"
+                           LineHeight="24"
+                           TextWrapping="Wrap"
+                           Foreground="{ThemeResource PdaTextBrush}" />
+            </ScrollViewer>
+        </Grid>
+
+        <Border Grid.Row="2"
+                Margin="8,0,8,8"
+                Background="{ThemeResource PdaSurfaceBrush}"
+                BorderBrush="{ThemeResource PdaSelectedBrush}"
+                BorderThickness="1"
+                CornerRadius="4">
+            <StackPanel>
+                <StackPanel x:Name="AttachmentsPanel"
+                            Visibility="Collapsed"
+                            Padding="10,8,10,0" />
+
+                <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                              HorizontalScrollMode="Enabled"
+                              VerticalScrollMode="Disabled">
+                    <StackPanel Orientation="Horizontal" Padding="6,6,6,2">
+                        <Button Content="B" FontWeight="Bold" Tag="b" Click="FormatButton_Click" />
+                        <Button Content="I" FontStyle="Italic" Tag="i" Click="FormatButton_Click" />
+                        <Button Content="U" Tag="u" Click="FormatButton_Click" />
+                        <Button Content="S" Tag="s" Click="FormatButton_Click" />
+                        <Button Content="Цитата" Tag="quote" Click="FormatButton_Click" />
+                        <Button Content="Код" Tag="code" Click="FormatButton_Click" />
+                        <Button Content="Спойлер" Tag="spoiler" Click="FormatButton_Click" />
+                        <Button Content="Ссылка" Tag="url" Click="FormatButton_Click" />
+                        <Button Content="IMG" Tag="img" Click="FormatButton_Click" />
+                        <Button Content="Список" Tag="list" Click="FormatButton_Click" />
+                    </StackPanel>
+                </ScrollViewer>
+
+                <Grid Padding="8,4,8,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0"
+                            ToolTipService.ToolTip="Прикрепить файлы"
+                            Click="AttachmentButton_Click"
+                            MinWidth="44"
+                            Padding="8">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Glyph="&#xE723;" FontSize="20" />
+                            <TextBlock x:Name="AttachmentCountTextBlock"
+                                       Margin="5,0,0,0"
+                                       VerticalAlignment="Center"
+                                       Visibility="Collapsed" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button Grid.Column="1"
+                            Margin="4,0,0,0"
+                            ToolTipService.ToolTip="Смайлы"
+                            MinWidth="44"
+                            Padding="8">
+                        <Button.Flyout>
+                            <Flyout x:Name="SmileFlyout" Placement="Top">
+                                <Grid Width="420" MaxHeight="390">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock x:Name="SmileCountTextBlock"
+                                               Text="Смайлы"
+                                               Margin="4,0,4,8"
+                                               FontSize="16"
+                                               FontWeight="SemiBold" />
+                                    <GridView x:Name="SmileGridView"
+                                              Grid.Row="1"
+                                              MaxHeight="340"
+                                              IsItemClickEnabled="True"
+                                              ItemClick="SmileGridView_ItemClick"
+                                              SelectionMode="None"
+                                              HorizontalAlignment="Stretch">
+                                        <GridView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Width="50" Height="50"
+                                                      ToolTipService.ToolTip="{Binding Code}">
+                                                    <Image Width="30"
+                                                           Height="30"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"
+                                                           Stretch="Uniform"
+                                                           Source="{Binding ImageSource}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </GridView.ItemTemplate>
+                                    </GridView>
+                                </Grid>
+                            </Flyout>
+                        </Button.Flyout>
+                        <FontIcon Glyph="&#xE76E;" FontSize="20" />
+                    </Button>
+
+                    <Button Grid.Column="2"
+                            Margin="4,0,0,0"
+                            ToolTipService.ToolTip="Предпросмотр"
+                            Click="PreviewButton_Click"
+                            MinWidth="44"
+                            Padding="8">
+                        <FontIcon Glyph="&#xE890;" FontSize="20" />
+                    </Button>
+
+                    <TextBlock x:Name="StatusTextBlock"
+                               Grid.Column="3"
+                               Margin="10,0"
+                               VerticalAlignment="Center"
+                               TextWrapping="Wrap"
+                               Foreground="{ThemeResource PdaSecondaryTextBrush}" />
+
+                    <Grid Grid.Column="4">
+                        <Button x:Name="SendButton"
+                                ToolTipService.ToolTip="Отправить"
+                                Click="SendButton_Click"
+                                MinWidth="48"
+                                Padding="10,8">
+                            <FontIcon Glyph="&#xE724;" FontSize="22" />
+                        </Button>
+                        <ProgressRing x:Name="SendProgressRing"
+                                      Width="28"
+                                      Height="28"
+                                      IsActive="False"
+                                      Visibility="Collapsed"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center" />
+                    </Grid>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

@@ -1,0 +1,166 @@
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:_4PDA" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" x:Class="_4PDA.UserPage" mc:Ignorable="d" Background="{ThemeResource PdaPageBackgroundBrush}" SizeChanged="UserPage_SizeChanged">
+
+    <Page.Resources>
+        <DataTemplate x:Key="ProfileRowTemplate">
+            <Grid Padding="0,7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="132"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="{Binding Title}" FontSize="13" FontWeight="SemiBold" Foreground="{ThemeResource PdaSecondaryTextBrush}" TextWrapping="Wrap" Margin="0,1,14,0"/>
+
+                <TextBlock Grid.Column="1" Text="{Binding Value}" FontSize="15" Foreground="{ThemeResource PdaTextBrush}" TextWrapping="Wrap"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="DeviceRowTemplate">
+            <Grid Padding="0,8,0,9">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="SemiBold" Foreground="{ThemeResource PdaTextBrush}" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding Accessory}" FontSize="13" Foreground="{ThemeResource PdaSecondaryTextBrush}" TextWrapping="Wrap" Margin="0,2,0,0"/>
+                </StackPanel>
+
+                <TextBlock Grid.Column="1" Text="&#xE76C;" FontFamily="Segoe MDL2 Assets" FontSize="13" Foreground="{ThemeResource PdaSecondaryTextBrush}" VerticalAlignment="Center" Margin="14,0,2,0"/>
+            </Grid>
+        </DataTemplate>
+
+        <Style x:Key="ProfileCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="{ThemeResource PdaSurfaceBrush}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundBaseLowBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Margin" Value="0,0,0,16"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <ScrollViewer x:Name="ProfileContentScrollViewer"
+                      Visibility="Collapsed"
+                      HorizontalScrollMode="Disabled"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalContentAlignment="Center">
+            <StackPanel Margin="0,28,0,44" HorizontalAlignment="Center" x:Name="ProfileRootPanel">
+
+                <Grid x:Name="ProfileLayoutGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="LeftProfileColumn" Width="*"/>
+                        <ColumnDefinition x:Name="LeftProfileSpacerColumn" Width="0"/>
+                        <ColumnDefinition x:Name="CenterProfileColumn" Width="0"/>
+                        <ColumnDefinition x:Name="RightProfileSpacerColumn" Width="0"/>
+                        <ColumnDefinition x:Name="RightProfileColumn" Width="0"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+
+                    <StackPanel x:Name="LeftProfileStack" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Top"><Border x:Name="ProfileCard" Style="{StaticResource ProfileCardStyle}">
+                        <StackPanel>
+                            <Border Width="112" Height="112" Background="{ThemeResource PdaPageBackgroundBrush}" BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}" BorderThickness="1" HorizontalAlignment="Left">
+                                <Image x:Name="AvatarImage" Stretch="UniformToFill"/>
+                            </Border>
+
+                            <TextBlock x:Name="NickTextBlock" Text="Пользователь" FontSize="27" FontWeight="SemiBold" Foreground="{ThemeResource PdaTextBrush}" TextWrapping="Wrap" Margin="0,14,0,0"/>
+
+                            <TextBlock x:Name="StatusTextBlock" FontSize="14" Foreground="{ThemeResource PdaSecondaryTextBrush}" TextWrapping="Wrap" Margin="0,3,0,0" Visibility="Collapsed"/>
+
+                            <TextBlock x:Name="GroupTextBlock" FontSize="16" FontWeight="SemiBold" Foreground="{ThemeResource SystemControlHighlightAccentBrush}" TextWrapping="Wrap" Margin="0,4,0,0"/>
+
+                            <TextBlock x:Name="IdTextBlock" FontSize="13" Foreground="{ThemeResource PdaTertiaryTextBrush}" TextWrapping="Wrap" Margin="0,5,0,12"/>
+
+                            <Grid x:Name="RegistrationPanel" Margin="0,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="126"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Регистрация" FontWeight="SemiBold" FontSize="13"/>
+                                <TextBlock x:Name="RegistrationTextBlock" Grid.Column="1" FontSize="13" TextWrapping="Wrap"/>
+                            </Grid>
+
+                            <Grid x:Name="LastVisitPanel" Margin="0,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="126"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Последний визит" FontWeight="SemiBold" FontSize="13"/>
+                                <TextBlock x:Name="LastVisitTextBlock" Grid.Column="1" FontSize="13" TextWrapping="Wrap"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <Border x:Name="ActionsBorder" Style="{StaticResource ProfileCardStyle}">
+                        <StackPanel>
+                            <TextBlock x:Name="ActionsTitleTextBlock" Text="Действия" FontSize="22" FontWeight="SemiBold" Foreground="{ThemeResource PdaTextBrush}" Margin="0,0,0,10"/>
+
+                            <StackPanel x:Name="ActionsGrid">
+                                <Button x:Name="RefreshButton"
+                                        Content="Обновить"
+                                        HorizontalAlignment="Stretch"
+                                        HorizontalContentAlignment="Center"
+                                        Click="RefreshAppBarButton_Click"/>
+
+                                <Button x:Name="LogoutButton"
+                                        Content="Выйти из аккаунта"
+                                        HorizontalAlignment="Stretch"
+                                        HorizontalContentAlignment="Center"
+                                        Margin="0,8,0,0"
+                                        Click="LogoutButton_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    </StackPanel>
+
+                    <StackPanel x:Name="CenterProfileStack" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Top"><Border x:Name="PersonalCard" Style="{StaticResource ProfileCardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="Личные данные" FontSize="22" FontWeight="SemiBold" Foreground="{ThemeResource PdaTextBrush}" Margin="0,0,0,4"/>
+
+                            <ItemsControl x:Name="PersonalRowsItemsControl" ItemTemplate="{StaticResource ProfileRowTemplate}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border x:Name="DevicesBorder" Style="{StaticResource ProfileCardStyle}" Visibility="Collapsed">
+                        <StackPanel>
+                            <TextBlock x:Name="DevicesTitleTextBlock" Text="Устройства" FontSize="22" FontWeight="SemiBold" Foreground="{ThemeResource PdaTextBrush}" Margin="0,0,0,4"/>
+
+                            <ListView x:Name="DeviceRowsItemsControl" ItemTemplate="{StaticResource DeviceRowTemplate}" IsItemClickEnabled="True" ItemClick="DeviceRowsItemsControl_ItemClick" SelectionMode="None" Padding="0">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                        <Setter Property="Padding" Value="0"/>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                            </ListView>
+                        </StackPanel>
+                    </Border>
+
+                    </StackPanel>
+
+                    <StackPanel x:Name="RightProfileStack" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Top"><Border x:Name="StatisticsCard" Style="{StaticResource ProfileCardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="Статистика" FontSize="22" FontWeight="SemiBold" Foreground="{ThemeResource PdaTextBrush}" Margin="0,0,0,4"/>
+
+                            <ItemsControl x:Name="StatisticsRowsItemsControl" ItemTemplate="{StaticResource ProfileRowTemplate}"/>
+                        </StackPanel>
+                    </Border>
+
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+
+        <ProgressRing x:Name="LoadingCircle"
+                      Width="48"
+                      Height="48"
+                      IsActive="True"
+                      Visibility="Visible"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"/>
+    </Grid>
+</Page>
