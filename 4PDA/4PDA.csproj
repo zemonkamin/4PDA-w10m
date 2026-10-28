@@ -439,7 +439,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LegacyProjects.UI.UniversalWindowsPlatform\LegacyProjects.UI.UniversalWindowsPlatform.csproj">
+    <ProjectReference Include="..\LegacyProjects.UI.UniversalWindowsPlatform\LegacyProjects.UI.UniversalWindowsPlatform\LegacyProjects.UI.UniversalWindowsPlatform.csproj">
       <Project>{7f39a356-5d9a-4e11-b8c8-685d5ad4b64b}</Project>
       <Name>LegacyProjects.UI.UniversalWindowsPlatform</Name>
     </ProjectReference>
